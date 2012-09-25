@@ -1,0 +1,73 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\title{Rapport de tp}
+\author{Ollivier et Bergeret}
+\date{\today}
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Introduction}
+
+Dans ce TP, nous allons introduire la programmation Assembleur.
+
+\section{Reponses}
+\subsection{Q1} 
+Nous savons que la valeur maximale pouvant être prise par suite de nbits est $2^{n}-1$. Par conséquent:\\
+eax = $2^{32}-1$\\
+ax = $2^{16}-1$\\
+ah = al = $2^{8}-1$\\
+
+\subsection{Q2}
+l'instruction mov permet d'affecter la valeur de l'opérande de droite vers l'opérande de gauche.\\
+
+Nous convertissons tout d'abord le nombre en base décimale vers une base hexadécimale:\\
+134512768 = 0x8048080\\
+Nous savons maintenant que eax contient cette valeur:\\
+eax = 0x8048080\\
+Par conséquent, en exploitant les sous registres d'eax, nous pouvons accèder à des portions de valeurs différentes.\\
+ax = 0x8080\\
+ah = 0X80\\
+al = 0x80\\
+
+\subsection{Q3}
+L'instruction add permet d'ajouter la valeur contenue dans l'opérande de droite vers l'opérande de gauche. Le résultat est sauvegardé dans l'opérande de gauche\\
+eax = 0xF000E0F0\\
+ax = 0xE0F0\\
+ah = 0xE0\\
+al = 0xF0\\
+
+\subsection{Q4}
+Afin d'obtenir la capacité de stockage totale, nous prenons la valeur de $2^32$, soit\\ %TODO insérer la valeur de 2^32
+3,73 Go (arrondi à $10^-2$)
+
+\subsection{Q5}
+Quand entre crochets, le nombre fait référence à la valeur située à l'adresse donnée. Sinon, il s'agit de la valeur elle-même
+
+\subsection{Q6}
+La case
+ax = 30
+
+\subsection{Q7}
+eax = OxA502
+
+\subsection{Q8}
+0: 0x01\\
+1: 0x02\\
+2: 0x01\\
+3: 0x01\\
+
+\subsection{Q9}
+0: 0x01\\
+1: 0x21\\
+2: 0x01\\
+3: 0x00\\
+
+\subsection{Q10}
+eax (little endian): 0x01\\
+eax (big endian):0x00
+
+\section{Conclusion}
+\end{document}

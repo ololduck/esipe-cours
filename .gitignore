@@ -3,3 +3,8 @@
 
 # build 
 *.html
+*.aux
+*.pdf
+*.log
+*.fdb_latexmk
+*.synctex.gz
