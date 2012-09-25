@@ -30,3 +30,5 @@ les fichiers assembleurs ont généralement pour extension `.asm`
   + les tableaux:
     `suite: times 85 dd 5`  
     Créé à partir de l'adresse `suite` de 85x4 octets tous initialisés à 5
+
+# TODO: Reprendre la translation du cours
