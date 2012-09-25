@@ -1,11 +1,19 @@
 {
-	"folders":
-	[
-		{
-			"path": "~/Dropbox/Documents/esipe-cours"
-		}
-	],
+    "folders":
+    [
+        {
+            "path": "~/Dropbox/Documents/esipe-cours"
+        }
+    ],
     "settings":{
         "trim_trailing_white_space_on_save": false
-    }
+    },
+    "file_exclude_patterns": [
+        "*.aux",
+        "*.fdb_latexmk",
+        "*.log",
+        "*.out",
+        "*.gz",
+        "*.toc"
+    ]
 }

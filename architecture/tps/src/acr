@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+fname=$1
+
+nasm $fname.asm -l $fname.lst -f elf -g -F dwarf
+gcc $fname.o -o $fname.bin
+chmod +x $fname.bin
+echo ""
+./$fname.bin
+echo ""

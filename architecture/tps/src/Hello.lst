@@ -1,0 +1,24 @@
+     1                                  ; Premier programme en assembleur
+     2                                  
+     3                                  SECTION .data ; Section des données.
+     4                                  msg :
+     5 00000000 48656C6C6F20576F72-         db "Hello World", 10 ; La chaine de caractères a afficher, 
+     6 00000009 6C640A             
+     7                                                           ; 10 est code ASCII retour a la ligne.
+     8                                  
+     9                                  SECTION .text            ; Section du code.
+    10                                  global main              ; Rend l'étiquette visible de l'extérieur.
+    11                                  main :                   ; Étiquette pointant au début du programme.
+    12 00000000 90                          nop                  ; Instruction vide
+    13 00000001 BA0C000000                  mov edx, 0xc         ; arg3, nombre de caractères a afficher 
+    14                                                           ; (Équivalent a mov edx, 12).
+    15 00000006 B9[00000000]                mov ecx, msg         ; arg2, adresse du premier caractère 
+    16                                                           ; à  afficher.
+    17 0000000B BB01000000                  mov ebx, 1           ; arg1, numéro de la sortie pour l'affichage, 
+    18                                                           ; 1 est la sortie standard.
+    19 00000010 B804000000                  mov eax, 4           ; Numéro de la commande write pour 
+    20                                                           ; l'interruption 80h.
+    21 00000015 CD80                        int 0x80             ; Interruption 0x80, appel au noyau.
+    22 00000017 BB00000000                  mov ebx, 0           ; Code de sortie, 0 est la sortie normale.
+    23 0000001C B801000000                  mov eax, 1           ; Numéro de la commande exit.
+    24 00000021 CD80                        int 0x80             ; Interruption 0x80, appel au noyau.

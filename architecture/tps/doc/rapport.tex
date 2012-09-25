@@ -1,73 +1,125 @@
-\documentclass[a4paper]{article}
+\documentclass[12pt,a4paper,oneside]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage[colorlinks=true,linkcolor=black]{hyperref}
+\pagestyle{fancy}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage[francais]{babel}
 \title{Rapport de tp}
-\author{Ollivier et Bergeret}
+\author{Paul Ollivier \and Bergeret}
 \date{\today}
 \begin{document}
-
 \maketitle
-
 \newpage
-
+\tableofcontents
+\newpage
 \section{Introduction}
 
-Dans ce TP, nous allons introduire la programmation Assembleur.
+Dans ce TP, nous allons introduire la programmation Assembleur. Ce langage est l'un des intermédiaires entre le langage machine et l'homme. Il présente cependant la particularité d'être très proche du langage machine, tout en restant raisonnablement lisible par l'homme.
 
-\section{Reponses}
-\subsection{Q1} 
+\newpage
+\section{Réponses}
+\subsection{Théorie de l'assembleur}
+\subsubsection{Q1} 
 Nous savons que la valeur maximale pouvant être prise par suite de nbits est $2^{n}-1$. Par conséquent:\\
 eax = $2^{32}-1$\\
 ax = $2^{16}-1$\\
 ah = al = $2^{8}-1$\\
 
-\subsection{Q2}
-l'instruction mov permet d'affecter la valeur de l'opérande de droite vers l'opérande de gauche.\\
 
-Nous convertissons tout d'abord le nombre en base décimale vers une base hexadécimale:\\
-134512768 = 0x8048080\\
-Nous savons maintenant que eax contient cette valeur:\\
-eax = 0x8048080\\
-Par conséquent, en exploitant les sous registres d'eax, nous pouvons accèder à des portions de valeurs différentes.\\
+\subsubsection{Q2}
+l'instruction mov permet d'affecter la valeur de l'opérande de droite vers l'opérande de gauche.
+
+Nous convertissons tout d'abord le nombre en base décimale vers une base hexadécimale:
+
+134512768 = 0x8048080
+
+Nous savons maintenant que eax contient cette valeur:
+
+eax = 0x8048080
+
+Par conséquent, en exploitant les sous registres d'eax, nous pouvons accèder à des portions de valeurs différentes.
+
 ax = 0x8080\\
 ah = 0X80\\
 al = 0x80\\
 
-\subsection{Q3}
-L'instruction add permet d'ajouter la valeur contenue dans l'opérande de droite vers l'opérande de gauche. Le résultat est sauvegardé dans l'opérande de gauche\\
+\subsubsection{Q3}
+L'instruction add permet d'ajouter la valeur contenue dans l'opérande de droite vers l'opérande de gauche. Le résultat est sauvegardé dans l'opérande de gauche
+
 eax = 0xF000E0F0\\
 ax = 0xE0F0\\
 ah = 0xE0\\
 al = 0xF0\\
 
-\subsection{Q4}
-Afin d'obtenir la capacité de stockage totale, nous prenons la valeur de $2^32$, soit\\ %TODO insérer la valeur de 2^32
-3,73 Go (arrondi à $10^-2$)
+\subsubsection{Q4}
+Afin d'obtenir la capacité de stockage totale, nous prenons la valeur de $2^{32}$, soit 3,73 Go (arrondi à $10^-2$)
 
-\subsection{Q5}
+\subsubsection{Q5}
 Quand entre crochets, le nombre fait référence à la valeur située à l'adresse donnée. Sinon, il s'agit de la valeur elle-même
 
-\subsection{Q6}
-La case
-ax = 30
+\subsubsection{Q6}
+La case à l'adresse 1 contient 30, par conséquent, ax = 30
 
-\subsection{Q7}
+\subsubsection{Q7}
 eax = OxA502
 
-\subsection{Q8}
+\subsubsection{Q8}
 0: 0x01\\
 1: 0x02\\
 2: 0x01\\
 3: 0x01\\
 
-\subsection{Q9}
+\subsubsection{Q9}
 0: 0x01\\
 1: 0x21\\
 2: 0x01\\
 3: 0x00\\
 
-\subsection{Q10}
+\subsubsection{Q10}
 eax (little endian): 0x01\\
 eax (big endian):0x00
 
+\subsection{Pratique: Compilation et éxecution}
+\subsubsection{Q11}
+Afin d'afficher Adieu monde cruel, il fallait modifier le message ligne 4, bien sûr, mais également ligne 12, la quantité de caractères à afficher, à savoir 0x12 (17 + newline)
+
+\lstinputlisting{../src/Q11.asm}
+
+\subsubsection{Q12}
+Après le placement d'un breakpoint à l'adresse main+1, nous obtenons via \texttt{info registers} le listing suivant:\\
+\texttt{
+eax            0x1  1\\
+ecx            0xbffff294   -1073745260\\
+edx            0xbffff224   -1073745372\\
+ebx            0xb7fbeff4   -1208225804\\
+esp            0xbffff1fc   0xbffff1fc\\
+ebp            0x0  0x0\\
+esi            0x0  0\\
+edi            0x0  0\\
+eip            0x80483c1    0x80483c1 <main+1>\\
+eflags         0x246    [ PF ZF IF ]\\
+cs             0x73 115\\
+ss             0x7b 123\\
+ds             0x7b 123\\
+es             0x7b 123\\
+fs             0x0  0\\
+gs             0x33 51\\
+}
+
+\subsubsection{Q13}
+Après éxécution de la commande \texttt{x/12cb \&msg}, nous obtenons l'output:
+
+\texttt{
+0x804a010 <msg>:    72 'H'  101 'e' 108 'l' 108 'l' 111 'o' 32 ' '  87 'W'  111 'o'\\
+0x804a018:  114 'r' 108 'l' 100 'd' 10 '\textbackslash n'
+}
+\newpage
 \section{Conclusion}
+CCL
 \end{document}
