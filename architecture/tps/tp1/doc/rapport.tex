@@ -11,7 +11,7 @@
 \usepackage{textcomp}
 \usepackage[francais]{babel}
 \title{Rapport de tp}
-\author{Paul Ollivier \and Bergeret}
+\author{Paul Ollivier \and Geoffrey Bergeret}
 \date{\today}
 \begin{document}
 \maketitle
@@ -26,7 +26,7 @@ Dans ce TP, nous allons introduire la programmation Assembleur. Ce langage est l
 \section{Réponses}
 \subsection{Théorie de l'assembleur}
 \subsubsection{Q1} 
-Nous savons que la valeur maximale pouvant être prise par suite de nbits est $2^{n}-1$. Par conséquent:\\
+Nous savons que la valeur maximale pouvant être prise par une suite de n bits est $2^{n}-1$. Par conséquent:\\
 eax = $2^{32}-1$\\
 ax = $2^{16}-1$\\
 ah = al = $2^{8}-1$\\
@@ -35,23 +35,19 @@ ah = al = $2^{8}-1$\\
 \subsubsection{Q2}
 l'instruction mov permet d'affecter la valeur de l'opérande de droite vers l'opérande de gauche.
 
-Nous convertissons tout d'abord le nombre en base décimale vers une base hexadécimale:
-
+Nous convertissons tout d'abord le nombre en base décimale vers une base hexadécimale:\\
 134512768 = 0x8048080
 
-Nous savons maintenant que eax contient cette valeur:
-
+Nous savons maintenant que eax contient cette valeur:\\
 eax = 0x8048080
 
-Par conséquent, en exploitant les sous registres d'eax, nous pouvons accèder à des portions de valeurs différentes.
-
+Par conséquent, en exploitant les sous registres d'eax, nous pouvons accèder à des portions de valeurs différentes.\\
 ax = 0x8080\\
 ah = 0X80\\
 al = 0x80\\
 
 \subsubsection{Q3}
-L'instruction add permet d'ajouter la valeur contenue dans l'opérande de droite vers l'opérande de gauche. Le résultat est sauvegardé dans l'opérande de gauche
-
+L'instruction add permet d'ajouter la valeur contenue dans l'opérande de droite vers l'opérande de gauche. Le résultat est sauvegardé dans l'opérande de gauche\\
 eax = 0xF000E0F0\\
 ax = 0xE0F0\\
 ah = 0xE0\\
@@ -119,7 +115,25 @@ Après éxécution de la commande \texttt{x/12cb \&msg}, nous obtenons l'output:
 0x804a010 <msg>:    72 'H'  101 'e' 108 'l' 108 'l' 111 'o' 32 ' '  87 'W'  111 'o'\\
 0x804a018:  114 'r' 108 'l' 100 'd' 10 '\textbackslash n'
 }
+
+\subsubsection{Q14}
+\texttt{x/3xw \&msg} affiche de manière brute la mémoire, sur 3 words, soit 12 octets.
+
+Nous pouvons remarquer l'emploi du \texttt{little endian}, les différents octets étant stockés dans l'ordre inverse de l'affichage de \texttt{x/12cb \&msg}
+
+\subsubsection{Q15}
+En avançant d'un seul step, nous pouvons remarquer plusieurs choses:
+
+Le registre \texttt{eip} a été modifié. Ce registre contient l'adresse de la prochaine adresse mémoire à éxecuter, il est donc normal que sa valeur soit modifié.
+
+De plus, le registre \texttt{edx} a également été modifié. Il est passé de \texttt{0xbffff214} à \texttt{0x0c}. Ce la correspond à l'éxecution de l'instruction \texttt{mov edx, 0xc}.
+
+\subsubsection{Q16}
+
+Afin de réaliser l'exercice, nous avons mis en place des watch points dans \texttt{gdb}, grâce à la commande \texttt{watch SYMBOL}, dans notre cas, les registre \texttt{eax, ebx, ecx, edx et bl}, ceux qui sont utilisés dans le code source
+\lstinputlisting{../src/gdb_myst_session.log}
+
 \newpage
 \section{Conclusion}
-CCL
+Ce TP nous a permis voir plusieurs concepts clés dans le fonctionnement du système: Premièrement, nous avons pu avoir un aperçu de l'assembleur grâce à des instructions simples et limitées, mais néanmoins essentielles. Deuxièmement, nous avons pu accèder en profondeur à la mémoire, et s'apercevoir de l'effet de la convention de stockage utilisée sur la mémoire.
 \end{document}
